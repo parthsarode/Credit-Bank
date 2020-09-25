@@ -1,6 +1,6 @@
 package com.jdbc.to;
 
-import java.util.Date;
+//import java.util.Date;
 
 public class Student {
 	private int studentId;
