@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -38,10 +39,10 @@ public class JDBCMySQLConnector {
 			Statement statement = null;
 			
 			Student student = null;
-			String query = "SELECT * FROM studentinformation WHERE student_id=" + studentId;
+			String query = "SELECT * FROM login WHERE student_id=" + studentId;
 			
 			try {
-				connection = JDBCMySQLConnection.getConnection();
+				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?autoReconnect=true&useSSL=false", "root", "");
 				statement = connection.createStatement();
 				rs = statement.executeQuery(query);
 				
@@ -68,5 +69,4 @@ public class JDBCMySQLConnector {
 			}
 			return student;
 		}
-
 }

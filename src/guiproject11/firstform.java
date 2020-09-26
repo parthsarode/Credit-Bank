@@ -5,6 +5,12 @@
  */
 package guiproject11;
 
+import java.sql.Connection;
+
+import javax.swing.JOptionPane;
+
+import com.mysql.jdbc.PreparedStatement;
+
 /**
  *
  * @author Dr. Milind
@@ -14,9 +20,11 @@ public class firstform extends javax.swing.JFrame {
     /**
      * Creates new form firstform
      */
+	Connection con = null;
     public firstform() {
         initComponents();
-    }
+        con = Database.dbconnect();
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -473,6 +481,32 @@ public class firstform extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    	
+    	try {
+    		int stdId = Integer.parseInt(jTextField1.getText());
+    		String stdName = jTextField2.getText();
+    		int age = Integer.parseInt(jTextField11.getText());
+    		String add = jTextArea1.getText();
+    		
+    		PreparedStatement pst = (PreparedStatement) con.prepareStatement("insert into login(student_id, Name, Age, Address) values(?,?,?,?)");
+    		pst.setInt(1, stdId);
+    		pst.setString(2, stdName);
+    		pst.setInt(3, age);
+    		pst.setString(4, add);
+    		pst.executeUpdate();
+    		
+    		JOptionPane.showMessageDialog(null, "Regester Successfully");
+    		
+    		jTextField1.setText("");
+    		jTextField2.setText("");
+    		jTextField11.setText("");
+    		jTextArea1.setText("");
+    		
+    	}catch(Exception e1)
+    	{
+    		e1.printStackTrace();
+    	}
+    	
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
