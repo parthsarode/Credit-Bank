@@ -82,9 +82,47 @@ public class JDBCMySQLConnector {
 		}
 		catch(Exception e2)
 		{
+<<<<<<< HEAD
 			System.out.println(e2);
 			return null;
 		}
 	}
 
+=======
+			ResultSet rs = null;
+			Connection connection = null;
+			Statement statement = null;
+			
+			Student student = null;
+			String query = "SELECT * FROM login WHERE student_id=" + studentId;
+			
+			try {
+				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?autoReconnect=true&useSSL=false", "root", "");
+				statement = connection.createStatement();
+				rs = statement.executeQuery(query);
+				
+				if(rs.next()) {
+					student = new Student();
+					student.setStudentId(rs.getInt("student_id"));
+					student.setStudentName(rs.getString("Name"));
+					student.setAge(rs.getInt("Age"));
+					student.setLocalAddress(rs.getString("Address"));
+				}
+			} catch (SQLException e)
+			{
+				e.printStackTrace();
+			} finally {
+				if(connection!=null) {
+					try {
+						connection.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+							
+				}
+			}
+			return student;
+		}
+>>>>>>> f10877da3672be0f2987b3cb99a66eab808c4d97
 }

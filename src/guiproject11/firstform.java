@@ -9,7 +9,12 @@ import java.sql.Connection;
 
 import javax.swing.JOptionPane;
 
+<<<<<<< HEAD
 import com.jdbc.main.JDBCMySQLConnector;
+=======
+import com.mysql.jdbc.PreparedStatement;
+
+>>>>>>> f10877da3672be0f2987b3cb99a66eab808c4d97
 /**
  *
  * @author Dr. Milind
@@ -19,11 +24,19 @@ public class firstform extends javax.swing.JFrame {
     /**
      * Creates new form firstform
      */
+<<<<<<< HEAD
 	Connection connection = null;
     public firstform() {
         initComponents();
         connection = JDBCMySQLConnector.dbconnect();
     }
+=======
+	Connection con = null;
+    public firstform() {
+        initComponents();
+        con = Database.dbconnect();
+     }
+>>>>>>> f10877da3672be0f2987b3cb99a66eab808c4d97
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -482,6 +495,7 @@ public class firstform extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	
     	try {
+<<<<<<< HEAD
     		int studentId = Integer.parseInt(jTextField1.getText());
     		String studentName = jTextField2.getText();
     		int age = Integer.parseInt(jTextField11.getText());
@@ -492,6 +506,18 @@ public class firstform extends javax.swing.JFrame {
     		pst.setString(2, studentName);
     		pst.setInt(3, age);
     		pst.setString(4, address);
+=======
+    		int stdId = Integer.parseInt(jTextField1.getText());
+    		String stdName = jTextField2.getText();
+    		int age = Integer.parseInt(jTextField11.getText());
+    		String add = jTextArea1.getText();
+    		
+    		PreparedStatement pst = (PreparedStatement) con.prepareStatement("insert into login(student_id, Name, Age, Address) values(?,?,?,?)");
+    		pst.setInt(1, stdId);
+    		pst.setString(2, stdName);
+    		pst.setInt(3, age);
+    		pst.setString(4, add);
+>>>>>>> f10877da3672be0f2987b3cb99a66eab808c4d97
     		pst.executeUpdate();
     		
     		JOptionPane.showMessageDialog(null, "Regester Successfully");
@@ -506,7 +532,10 @@ public class firstform extends javax.swing.JFrame {
     		e1.printStackTrace();
     	}
     	
+<<<<<<< HEAD
     	
+=======
+>>>>>>> f10877da3672be0f2987b3cb99a66eab808c4d97
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
