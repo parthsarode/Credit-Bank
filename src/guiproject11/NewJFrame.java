@@ -1,13 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package guiproject11;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 /**
  *
  * @author Dr. Milind
  */
+
 public class NewJFrame extends javax.swing.JFrame {
 
     /**
@@ -16,6 +22,41 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
     }
+    
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
+    public void Connect()
+    {
+    	try
+    	{
+    		Class.forName("com.mysql.jdbc.Driver");
+    		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_bank","root","root");
+    	}
+    	catch (ClassNotFoundException | SQLException ex)
+    	{
+    		Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE,null,ex);
+    	}
+    }
+    
+    
+    
+    
+//    public Connection getConnection()
+//    {
+//    	Connection con;
+//    	try 
+//    	{
+//    		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_bank","root","root");
+//    		return con;
+//    	}
+//    	catch (Exception e)
+//    	{
+//    		e.printStackTrace();
+//    		return null;
+//    	}
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,7 +165,98 @@ public class NewJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+    
+    private void registerbtnActionPerformed(java.awt.event.ActionEvent evt)
+    {
+//    	String jTextField1 = jTextField1.getText();
+//    	int jTextField2 = Integer.parseInt(jTextField2);
+//    	String jTextField2 = jTextField2.getText();
+    	
+    	try 
+    	{
+    		Connect();
+    		String query = "select * from studentinformation where studentId=?";
+    		String s2 = jTextField2.getText();
+        	String s4 = jTextField4.getText();
+    		
+    		pst = con.prepareStatement(query);
+    		pst.setString(1,jTextField1.getText());
+        	pst.setInt(2,Integer.parseInt(s2));
+        	pst.setString(3,jTextField3.getText());
+        	pst.setInt(4,Integer.parseInt(s4));
+        	pst.setString(5,jTextField5.getText());
+        	pst.setString(6,jTextField6.getText());
+        	pst.setString(7,jTextField7.getText());
+//        	pst.executeUpdate();
+        	
+        	rs = pst.executeQuery();
+        	if(rs.next())
+        	{
+        		String msg = "Registration Successful";
+        		JOptionPane.showMessageDialog(this, msg);
+        	}
+        	else
+        	{
+        		JOptionPane.showMessageDialog(this, "Not Registered");
+        	}       	
+        	
+    	}
+    	catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    }
+    
+    
+//    void loadSampleData ()
+//    {
+//    	try {
+//    		Class.forName("com.jdbc.mysql.Driver");
+//    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/credit_bank","root","root");
+//    		java.sql.Statement st = con.createStatement();
+//    		ResultSet rs = st.executeQuery("INSERT INTO `credit_bank`.`studentinformation` (`studentId`,`studentName`,`studentAadhar`,`studentAddress`,`currentSem`,`studentPhoneNo`,`branch`)VALUES(?,?,?,?,?,?,?)");
+//    		
+//    		
+//    		
+//    	}
+//    	catch (Exception ex)
+//    	{
+//    		
+//    	}
+//    }
+    
+    
 
+    
+//    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt)
+//    {
+//    	try {
+//    	Connection con;
+//    	JDBCMySQLConnector registercon = new JDBCMySQLConnector();
+//    	con = registercon.getRegisterConnection();
+//    	String s2 = jTextField2.getText();
+//    	String s4 = jTextField4.getText();
+//    	String query = "INSERT INTO `credit_bank`.`studentinformation` (`studentId`,`studentName`,`studentAadhar`,`studentAddress`,`currentSem`,`studentPhoneNo`,`branch`)VALUES(?,?,?,?,?,?,?)";
+//
+//    	java.sql.PreparedStatement pst = con.prepareStatement(query);
+//    	pst.setString(1,jTextField1.getText());
+//    	pst.setInt(2,Integer.parseInt(s2));
+//    	pst.setString(3,jTextField3.getText());
+//    	pst.setInt(4,Integer.parseInt(s4));
+//    	pst.setString(5,jTextField5.getText());
+//    	pst.setString(6,jTextField6.getText());
+//    	pst.setString(7,jTextField7.getText());
+//    	pst.executeUpdate();
+//    	
+//    	JOptionPane.showMessageDialog(rootPane, "User Registration Succesfull");
+//    	}
+//    	catch (SQLException ex) {
+//    		Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE,null,ex);
+//    	}
+//    }
+    
     /**
      * @param args the command line arguments
      */
