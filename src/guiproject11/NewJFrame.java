@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 /**
  *
  * @author Dr. Milind
@@ -82,6 +84,12 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
+       
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,7 +176,7 @@ public class NewJFrame extends javax.swing.JFrame {
     
     
     
-    private void registerbtnActionPerformed(java.awt.event.ActionEvent evt)
+    /*private void registerbtnActionPerformed(java.awt.event.ActionEvent evt)
     {
 //    	String jTextField1 = jTextField1.getText();
 //    	int jTextField2 = Integer.parseInt(jTextField2);
@@ -207,7 +215,7 @@ public class NewJFrame extends javax.swing.JFrame {
     	{
     		ex.printStackTrace();
     	}
-    }
+    }*/
     
     
 //    void loadSampleData ()
